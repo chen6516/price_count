@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="lazyLoadingEnabled" value="false" />
+	</settings>
+	<typeAliases>
+		<typeAlias alias="Bill" type="com.chenlong.pc.entity.Bill" />
+		<typeAlias alias="Debt" type="com.chenlong.pc.entity.Debt" />
+		<typeAlias alias="Home" type="com.chenlong.pc.entity.Home" />
+		<typeAlias alias="Item" type="com.chenlong.pc.entity.Item" />
+		<typeAlias alias="Log" type="com.chenlong.pc.entity.Log" />
+		<typeAlias alias="Notice" type="com.chenlong.pc.entity.Notice" />
+		<typeAlias alias="Person" type="com.chenlong.pc.entity.Person" />
+		<typeAlias alias="Purchaser" type="com.chenlong.pc.entity.Purchaser" />
+	</typeAliases>
+	<mappers>
+	    <mapper resource="com/chenlong/pc/dao/BillDaoMapper.xml"/>
+	    <mapper resource="com/chenlong/pc/dao/DebtDaoMapper.xml"/>
+	    <mapper resource="com/chenlong/pc/dao/HomeDaoMapper.xml"/>
+	    <mapper resource="com/chenlong/pc/dao/ItemDaoMapper.xml"/>
+	    <mapper resource="com/chenlong/pc/dao/LogDaoMapper.xml"/>
+	    <mapper resource="com/chenlong/pc/dao/NoticeDaoMapper.xml"/>
+	    <mapper resource="com/chenlong/pc/dao/PersonDaoMapper.xml"/>
+	    <mapper resource="com/chenlong/pc/dao/PurchaserDaoMapper.xml"/>
+	</mappers>
+</configuration>

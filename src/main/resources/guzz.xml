@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE guzz-configs PUBLIC "-//GUZZ//MAIN CONFIG DTD//EN" "http://www.guzz.org/dtd/guzz.dtd">
+<guzz-configs>
+
+	<dialect class="org.guzz.dialect.Mysql5Dialect" />
+
+	<tran locator="spring">
+		<dbgroup name="default" masterDBConfigName="masterDB" />
+	</tran>
+	
+	<config-server>
+		<server class="org.guzz.config.LocalFileConfigServer">
+			<param name="resource" value="guzz.properties" />
+		</server>
+	</config-server>
+
+	<business-scan resources="classpath*:/com/cloudvast/crm/entity/*/*.class" />
+	<business-scan resources="classpath*:/com/cloudvast/crm/entity/*.class" />
+	<sqlMap></sqlMap>
+</guzz-configs>

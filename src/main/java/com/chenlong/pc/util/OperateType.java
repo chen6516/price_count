@@ -1,0 +1,15 @@
+package com.chenlong.pc.util;
+
+public enum OperateType {
+	BILL_ADD, BILL_UPDATE, BILL_DELETE,
+	DEBT_ADD, DEBT_UPDATE, DEBT_DELETE,
+	HOME_ADD, HOME_UPDATE, HOME_DELETE,
+	ITEM_ADD, ITEM_UPDATE, ITEM_DELETE,
+	NOTICE_ADD, NOTICE_UPDATE, NOTICE_DELETE,
+	PERSON_ADD, PERSON_UPDATE, PERSON_DELETE,
+	PURCHASER_ADD, PURCHASER_UPDATE, PURCHASER_DELETE;
+	
+	public static byte getOrdinal(OperateType operateType){
+		return (byte)operateType.ordinal();
+	}
+}

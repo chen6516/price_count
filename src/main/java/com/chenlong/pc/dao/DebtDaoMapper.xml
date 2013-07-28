@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chenlong.pc.dao.DebtDao">
+	<select id="countAll" resultType="int" parameterType="string">
+	    SELECT COUNT(_id) FROM _debt
+	    WHERE _home_id= #{homeId};
+	</select>
+	
+	<insert id="save" parameterType="Debt">
+		INSERT INTO _debt(_id, _person_id, _debt_persion_id, _sum,
+			_active, _home_id, _create_date)
+		VALUES(#{id}, #{personId}, #{debtPersionId}, #{sum},
+			#{active}, #{homeId}, #{createDate})
+	</insert>
+	<sql id="useColumns">
+		_id id,
+		_person_id personId,
+		_debt_persion_id debtPersionId,
+		_sum sum,
+		_active active,
+		_home_id homeId, 
+		_create_date createDate
+	</sql>
+	<select id="findAll" resultType="Debt" parameterType="string" >
+		SELECT 
+		<include refid="useColumns"/>
+		FROM  _Debt
+		WHERE  _home_id = #{homeId}
+	</select>
+	
+	<select id="findById" resultType="Debt" parameterType="string" >
+		SELECT 
+		 <include refid="useColumns"/>
+		FROM  _debt
+		WHERE  _id = #{id}
+	</select>
+	<select id="findTop" resultType="Debt" parameterType="map" >
+		SELECT 
+		 <include refid="useColumns"/>
+		FROM  _debt
+		WHERE  _home_id = #{homeId}
+		limit #{from},#{size}
+	</select>
+	
+	<delete id="delete" parameterType="string">
+		delete from _debt where _id = #{id}
+	</delete>
+	<update id="update" parameterType="Debt">
+		UPDATE _debt
+		<set>
+			<if test="sum != null">
+				_sum = #{sum},
+			</if>
+			<if test="active != null">
+				_active = #{active},
+			</if>
+		</set>
+		WHERE 
+			_id = #{id}
+	</update>
+</mapper>

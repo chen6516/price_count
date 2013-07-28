@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chenlong.pc.dao.BillDao">
+
+	<select id="countAll" resultType="int" parameterType="string">
+	    SELECT COUNT(_id) c FROM _bill
+	    WHERE _home_id= #{homeId};
+	</select>
+	
+	<insert id="save" parameterType="Bill">
+		INSERT INTO _bill(_id, _person_id, _price, _active, _share_type,
+			_remark,_home_id, _create_date)
+		VALUES(#{id}, #{personId}, #{price}, #{active}, #{shareType},
+			#{remark}, #{homeId}, #{createDate})
+	</insert>
+	<sql id="useColumns">
+	      _id  id,
+		 _person_id personId, 
+		  _price price,
+		 _active active,
+		 _share_type shareType,
+		 _remark remark,
+		 _home_id homeId,
+		 _create_date createDate
+	</sql>
+	<select id="findAll" resultType="Bill" parameterType="string" >
+		SELECT 
+		<include refid="useColumns"/>
+		FROM  _bill
+		WHERE  _home_id = #{homeId}
+	</select>
+	
+	<select id="findById" resultType="Bill" parameterType="string" >
+		SELECT 
+		 <include refid="useColumns"/>
+		FROM  _bill
+		WHERE  _id = #{id}
+	</select>
+	<select id="findTop" resultType="Bill" parameterType="map" >
+		SELECT 
+		 <include refid="useColumns"/>
+		FROM  _bill
+		WHERE  _home_id = #{homeId}
+		limit #{from},#{size}
+	</select>
+	
+	<delete id="delete" parameterType="string">
+		delete from _bill where _id = #{id}
+	</delete>
+	<update id="update" parameterType="Bill">
+		UPDATE _bill
+		<set>
+			<if test="price != null">
+				_price = #{price},
+			</if>
+			<if test="active != null">
+				_active = #{active},
+			</if>
+			<if test="shareType != null">
+				_share_type = #{shareType}
+			</if>
+		</set>
+		WHERE 
+			_id = #{id}
+	</update>
+	<!-- 
+	
+	 -->
+</mapper>

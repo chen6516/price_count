@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chenlong.pc.dao.HomeDao">
+	<cache />
+	<select id="countAll" resultType="int">
+	    SELECT COUNT(_id) FROM _home;
+	</select>
+	
+	<insert id="save" parameterType="Home">
+		INSERT INTO _home(_id, _name, _locate, _owner_phone,
+			_wifi_name, _wifi_password, _active, _create_date)
+		VALUES(#{id}, #{name}, #{locate}, #{ownerPhone},
+			#{wifiName}, #{wifiPassword},  #{active}, #{createDate})
+	</insert>
+	
+	<sql id="useColumns">
+		_id id,
+		_name name,
+		_locate locate,
+		_owner_phone ownerPhone,
+		_wifi_name wifiName, 
+		_wifi_password wifiPassword, 
+		_active active,
+		_create_date createDate
+	</sql>
+	<select id="findAll" resultType="Home">
+		SELECT 
+		<include refid="useColumns"/>
+		FROM  _home
+	</select>
+	
+	<select id="findById" resultType="Home" parameterType="string" >
+		SELECT 
+		 <include refid="useColumns"/>
+		FROM  _home
+		WHERE  _id = #{id}
+	</select>
+	
+	<select id="findTop" resultType="Home" parameterType="map" >
+		SELECT 
+		 <include refid="useColumns"/>
+		FROM  _home
+		limit #{from},#{size}
+	</select>
+	
+	<delete id="delete" parameterType="string">
+		delete from _home where _id = #{id}
+	</delete>
+	
+	<update id="update" parameterType="Home">
+		UPDATE _home
+		<set>
+			<if test="name != null">
+				_name = #{name},
+			</if>
+			<if test="locate != null">
+				_locate = #{locate},
+			</if>
+			<if test="ownerPhone != null">
+				_owner_phone = #{ownerPhone},
+			</if>
+			<if test="ownerPhone != null">
+				_owner_phone = #{ownerPhone},
+			</if>
+			<if test="wifiName != null">
+				_wifi_name = #{wifiName},
+			</if>
+			<if test="wifiPassword != null">
+				_wifi_password = #{wifiPassword},
+			</if>
+			<if test="active != null">
+				_active = #{active},
+			</if>
+		</set>
+		WHERE 
+			_id = #{id}
+	</update>  
+</mapper>
