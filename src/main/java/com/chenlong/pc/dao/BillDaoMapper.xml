@@ -4,12 +4,12 @@
 
 <mapper namespace="com.chenlong.pc.dao.BillDao">
 
-	<select id="countAll" resultType="int" parameterType="string">
+	<select id="countAll" resultType="int" parameterType="map">
 	    SELECT COUNT(_id) c FROM _bill
 	    WHERE _home_id= #{homeId};
 	</select>
 	
-	<insert id="save" parameterType="Bill">
+	<insert id="save" parameterType="map">
 		INSERT INTO _bill(_id, _person_id, _price, _active, _share_type,
 			_remark,_home_id, _create_date)
 		VALUES(#{id}, #{personId}, #{price}, #{active}, #{shareType},
@@ -25,14 +25,14 @@
 		 _home_id homeId,
 		 _create_date createDate
 	</sql>
-	<select id="findAll" resultType="Bill" parameterType="string" >
+	<select id="findAll" resultType="Bill" parameterType="map" >
 		SELECT 
 		<include refid="useColumns"/>
 		FROM  _bill
 		WHERE  _home_id = #{homeId}
 	</select>
 	
-	<select id="findById" resultType="Bill" parameterType="string" >
+	<select id="findById" resultType="Bill" parameterType="map" >
 		SELECT 
 		 <include refid="useColumns"/>
 		FROM  _bill
